@@ -1,0 +1,139 @@
+<div class="sidebar-container">
+  <div class="sidebar-logo">
+    PrimeNG
+  </div>
+  <ul class="sidebar-navigation">
+    
+    <li>
+      <a href="#" (click)="menuSelect('dropdown')">
+        <i class="fa fa-home" aria-hidden="true" ></i> Dropdown
+      </a>
+    </li>
+    <li>
+      <a href="#" (click)="menuSelect('lightBox')">
+        <i class="fa fa-tachometer" aria-hidden="true"></i> Lightbox
+      </a>
+    </li>
+    <li>
+      <a href="#" (click)="menuSelect('accordion')">
+        <i class="fa fa-users" aria-hidden="true"></i> Accordion
+      </a>
+    </li>
+    <li>
+      <a href="#" (click)="menuSelect('rating')">
+        <i class="fa fa-cog" aria-hidden="true"></i> Input Rating
+      </a>
+    </li>
+    <li>
+      <a href="#" (click)="menuSelect('slider')">
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Input slider
+      </a>
+    </li>
+    <li>
+      <a href="#" (click)="menuSelect('carousel')">
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Carousel
+      </a>
+    </li> <li>
+      <a href="#" (click)="menuSelect('treeTable')" >
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Table
+      </a>
+    </li> <li>
+      <a href="#">
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Data View
+      </a>
+    </li> <li>
+      <a href="#" (click)="menuSelect('charts')">
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Charts
+      </a>
+    </li> <li>
+      <a href="#" (click)="menuSelect('calendar')">
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Date Picker
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="content-container">
+<!-- {{menuitem |json}} -->
+  <div class="container-fluid">
+<div class="row">
+  <div class="col-lg-12" *ngIf="menuitem.dropdown">
+    <p-dropdown [options]="dropdownData" [(ngModel)]="selectedCity" name="fdds" optionLabel="label" (ngModelChange)="selected(selectedCity)"></p-dropdown>
+    <!-- <p>Selected City: {{selectedCity?.label }}</p> {{selectedCity | json}} -->
+  </div>
+  <div class="col-lg-12"  *ngIf="menuitem.lightBox">
+    <h3 class="first">LightBox</h3>
+<p-lightbox [images]="images"></p-lightbox>
+  </div>
+  <div class="col-lg-12" *ngIf="menuitem.accordion">
+    <p-accordion>
+      <p-accordionTab header="Godfather I" [selected]="true">
+          The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war, but does not intend to become part of his father's business. T hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+      </p-accordionTab>
+      <p-accordionTab header="Godfather II">
+          Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
+      </p-accordionTab>
+      <p-accordionTab header="Godfather III">
+          After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+      </p-accordionTab>
+  </p-accordion>
+  </div>
+  <div class="col-lg-12" *ngIf="menuitem.rating">
+    <h3 class="first">Basic {{val1}}</h3> 
+    <p-rating [(ngModel)]="val1"></p-rating>
+  </div>
+  <div class="col-lg-12" *ngIf="menuitem.slider">
+    <h3 class="first">Basic: {{val1}}</h3>
+<p-slider [(ngModel)]="val1" [style]="{'width':'14em'}"></p-slider>
+  </div>
+  <div class="col-lg-12" *ngIf="menuitem.charts">
+    <p-chart type="pie" [data]="data" width="40vw" height="80vh"></p-chart>
+<button type="button" pButton (click)="update($event)"></button>
+  </div>
+  <div class="col-lg-12" *ngIf="menuitem.carousel">
+    <p-carousel [value]="cars" [numVisible]="4" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+      <p-header>
+          <h3>Basic</h3>
+      </p-header>
+      <ng-template let-car pTemplate="item">
+          <div class="car-details">
+              <div class="p-grid p-nogutter">
+                  <div class="p-col-12">
+                      <img src="assets/images/{{car.brand}}.jfif" width="200vw" height="200vh">
+                      </div>
+                  <div class="p-col-12 car-data">
+                      <div class="car-title">{{car.brand}}</div>
+                      <div class="car-subtitle">{{car.year}} | {{car.color}}</div>
+                  </div>
+              </div>
+          </div>
+      </ng-template>
+  </p-carousel>
+  </div>
+  <div class="col-lg-12" *ngIf="menuitem.calendar">
+    <p-calendar [(ngModel)]="date1"  [showIcon]="true"></p-calendar>
+  </div>
+  <div class="col-lg-12" *ngIf="menuitem.treeTable">
+    <p-treeTable [value]="files2" [columns]="cols">
+      <ng-template pTemplate="header" let-columns>
+          <tr [ttRow]="rowNode">
+              <th *ngFor="let col of columns">
+                  {{col.header}}
+              </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+          <tr>
+              <td *ngFor="let col of columns; let i = index">
+                  <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                  {{rowData[col.field]}}
+              </td>
+          </tr>
+      </ng-template>
+  </p-treeTable>
+  </div>
+</div>
+
+
+  </div>
+</div>
